@@ -19,7 +19,7 @@ ___
 
 ## Contributing
 Please first discuss any change you want to make publicly, for example on GitHub via raising an [issue](https://github.com/llmware-ai/llmware/issues) or starting a [new discussion](https://github.com/llmware-ai/llmware/discussions).
-You can also write an email or start a discussion on our Discrod channel.
+You can also write an email or start a discussion on our Discord channel.
 Read more about becoming a contributor in the [GitHub repo](https://github.com/llmware-ai/llmware/blob/main/CONTRIBUTING.md).
 
 ## Code of conduct
@@ -55,9 +55,9 @@ The company offers a Software as a Service (SaaS) Retrieval Augmented Generation
     <li class="d-inline-block mr-1">
         <a href="https://www.youtube.com/@llmware"><span><i class="fa-brands fa-youtube"></i></span></a>
     </li>
-    <li class="d-inline-block mr-1">
-        <a href="https://huggingface.co/llmware"><span><img src="assets/images/hf-logo.svg" alt="Hugging Face" class="hugging-face-logo"/></span></a>
-    </li>
+   <li class="d-inline-block mr-1">
+    <a href="https://huggingface.co/llmware"><span> <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face" class="hugging-face-logo"/> </span></a>
+     </li>
     <li class="d-inline-block mr-1">
         <a href="https://www.linkedin.com/company/aibloks/"><span><i class="fa-brands fa-linkedin"></i></span></a>
     </li>
