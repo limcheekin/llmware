@@ -37,6 +37,7 @@ from llmware.status import Status
 from llmware.prompts import Prompt
 from llmware.configs import LLMWareConfig, MilvusConfig
 from importlib import util
+from llmware.models import ModelCatalog
 
 if not util.find_spec("torch") or not util.find_spec("transformers"):
     print("\nto run this example, with the selected embedding model, please install transformers and torch, e.g., "
@@ -133,7 +134,7 @@ def semantic_rag (library_name, embedding_model_name, llm_model_name):
 
 if __name__ == "__main__":
 
-    LLMWareConfig().set_active_db("sqlite")
+    LLMWareConfig().set_active_db("postgres")
 
     #   we will use one of the most popular open source embedding models by jina-ai
     #   e.g., jinaai/jina-embeddings-v2-base-en
@@ -143,20 +144,24 @@ if __name__ == "__main__":
 
     #   note: starting with llmware>=0.3.0, we support the new milvus lite - you can ignore or comment out if
     #   using a different vector db -> note: milvus lite only on mac/linux (not windows)
-    MilvusConfig().set_config("lite", True)
+    # MilvusConfig().set_config("lite", True)
 
     #   select one of:  'milvus' | 'chromadb' | 'lancedb' | 'faiss'
-    LLMWareConfig().set_vector_db("chromadb")
+    LLMWareConfig().set_vector_db("postgres")
 
-    vector_db = "chromadb"
+    vector_db = "postgres"
 
     # pick any name for the library
     lib_name = "example_5_library"
 
-    example_models = ["bling-phi-3-gguf", "llmware/bling-1b-0.1", "llmware/dragon-yi-6b-gguf"]
+    #example_models = ["bling-phi-3-gguf", "llmware/bling-1b-0.1", "llmware/dragon-yi-6b-gguf"]
 
     # use local cpu model
-    llm_model_name = example_models[0]
+    #llm_model_name = example_models[0]
+    llm_model_name = "qwen2.5:0.5b"
+
+    #   register model
+    ModelCatalog().register_ollama_model(model_name=llm_model_name,model_type="chat",host="localhost",port=11434)    
 
     #   to swap in a gpt-4 openai model - uncomment these two lines
     #   llm_model_name = "gpt-4"

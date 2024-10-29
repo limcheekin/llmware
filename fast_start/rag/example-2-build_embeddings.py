@@ -93,7 +93,7 @@ def install_vector_embeddings(library, embedding_model_name):
           f"model - {embedding_model_name}")
 
     #   *** this is the one key line of code to create the embedding ***
-    library.install_new_embedding(embedding_model_name=embedding_model, vector_db=vector_db,batch_size=100)
+    library.install_new_embedding(embedding_model_name=embedding_model, vector_db=vector_db, batch_size=100)
 
     #   note: for using llmware as part of a larger application, you can check the real-time status by polling Status()
     #   --both the EmbeddingHandler and Parsers write to Status() at intervals while processing
@@ -140,33 +140,33 @@ if __name__ == "__main__":
     #   Fast Start configuration - will use no-install embedded sqlite
     #   -- if you have installed Mongo or Postgres, then change the .set_active_db accordingly
 
-    LLMWareConfig().set_active_db("sqlite")
+    LLMWareConfig().set_active_db("postgres")
 
     #   Select a 'no install' vector db
 
     #   note: starting with llmware>=0.3.0, we support the new milvus lite - you can ignore or comment out if
     #   using a different vector db - and note: only available on mac/linux
-    MilvusConfig().set_config("lite", True)
+    # MilvusConfig().set_config("lite", True)
 
     #   select one of:  'milvus' | 'chromadb' | 'lancedb' | 'faiss'
-    LLMWareConfig().set_vector_db("chromadb")
+    LLMWareConfig().set_vector_db("postgres")
 
     #  Step 1 - this example requires us to have a library created - two options:
 
     #  if you completed example-1 - then load the library you created in that example, e.g., "example1_library"
     #  uncomment the line below:
-    #  library = Library().load_library("example1_library")
+    library = Library().load_library("example1_library")
 
     #  alternatively, to use this example as self-contained, then create a new library from scratch:
-    library = setup_library("example2_library")
+    # library = setup_library("example2_library")
 
     #   Step 2 - Select any embedding model in the LLMWare catalog
 
     #   to see a list of the embedding models supported, uncomment the line below and print the list
-    embedding_models = ModelCatalog().list_embedding_models()
+    #embedding_models = ModelCatalog().list_embedding_models()
 
-    #   for i, models in enumerate(embedding_models):
-    #       print("embedding models: ", i, models)
+    #for i, models in enumerate(embedding_models):
+    #    print("embedding models: ", i, models)
 
     #   for this first embedding, we will use a very popular and fast sentence transformer
     #   -- these models require `pip3 install transformers` and `pip3 install torch`

@@ -432,31 +432,40 @@ if __name__ == "__main__":
     #   A few useful methods to discover and display a list of available models...
 
     #   all generative models
-    llm_models = ModelCatalog().list_generative_models()
+    #llm_models = ModelCatalog().list_generative_models()
 
     #   if you only want to see the local models
-    llm_local_models = ModelCatalog().list_generative_local_models()
+    #llm_local_models = ModelCatalog().list_generative_local_models()
 
     #   to see only the open source models
-    llm_open_source_models = ModelCatalog().list_open_source_models()
+    #llm_open_source_models = ModelCatalog().list_open_source_models()
 
     #   we will print out the local models
-    for i, models in enumerate(llm_local_models):
-        print("models: ", i, models["model_name"], models["model_family"])
+    #for i, models in enumerate(llm_local_models):
+    #    print("models: ", i, models["model_name"], models["model_family"])
 
     #   for purposes of demo, try a few selected models from the list
 
     #   each of these pytorch models are ~1b parameters and will run reasonably fast and accurate on CPU
     #   --per note above, may require separate pip3 install of: torch and transformers
-    pytorch_generative_models = ["llmware/bling-1b-0.1", "llmware/bling-tiny-llama-v0", "llmware/bling-falcon-1b-0.1"]
+    #pytorch_generative_models = ["llmware/bling-1b-0.1", "llmware/bling-tiny-llama-v0", "llmware/bling-falcon-1b-0.1"]
 
     #   bling-answer-tool is 1b parameters quantized
     #   bling-phi-3-gguf is 3.8b parameters quantized
     #   dragon-yi-6b-gguf is 6b parameters quantized
-    gguf_generative_models = ["bling-answer-tool", "bling-phi-3-gguf","llmware/dragon-yi-6b-gguf"]
+    #gguf_generative_models = ["bling-answer-tool", "bling-phi-3-gguf","llmware/dragon-yi-6b-gguf"]
 
     #   by default, we will select a gguf model requiring no additional imports
-    model_name = gguf_generative_models[0]
+    #model_name = gguf_generative_models[0]
+
+    model_name = "qwen2.5:0.5b"
+
+    #   register model
+    ModelCatalog().register_ollama_model(model_name=model_name,model_type="chat",host="localhost",port=11434)
+
+    #   optional - confirm that model was registered
+    my_new_model_card = ModelCatalog().lookup_model_card(model_name)
+    print("\nupdate: confirming - new ollama " + model_name + " model card - ", my_new_model_card)
 
     #   to swap in a gpt-4 openai model - uncomment these two lines
     #   model_name = "gpt-4"

@@ -21,7 +21,7 @@ from llmware.library import Library
 from llmware.prompts import Prompt, HumanInTheLoop
 from llmware.retrieval import Query
 from llmware.configs import LLMWareConfig
-
+from llmware.models import ModelCatalog
 
 def msa_processing(library_name, llm_model_name):
 
@@ -105,12 +105,17 @@ def msa_processing(library_name, llm_model_name):
 
 if __name__ == "__main__":
 
-    LLMWareConfig().set_active_db("sqlite")
+    LLMWareConfig().set_active_db("postgres")
 
     #   this is part of the DRAGON model series - RAG-fine-tuned fact-based Q&A model
-    llm = "bling-phi-3-gguf"
+    model_name = "hf.co/llmware/bling-phi-3.5-gguf"
     
-    #   feel free to also try:  "dragon-yi-answer-tool" as a good substitute option
+     #   register model
+    ModelCatalog().register_ollama_model(model_name=model_name,model_type="chat",host="localhost",port=11434) 
+     # confirm that model was registered
+    my_new_model_card = ModelCatalog().lookup_model_card(model_name)
+    print("\nupdate: confirming - new ollama " + model_name + " model card - ", my_new_model_card)   
 
-    m = msa_processing("example6_library", llm)
+    #   feel free to also try:  "dragon-yi-answer-tool" as a good substitute option
+    m = msa_processing("example6_library", model_name)
 

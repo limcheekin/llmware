@@ -22,6 +22,7 @@ from llmware.setup import Setup
 from llmware.configs import LLMWareConfig
 from llmware.retrieval import Query
 from llmware.library import Library
+from llmware.models import ModelCatalog
 
 
 def example_4a_contract_analysis_from_library (model_name, verbose=False):
@@ -169,19 +170,23 @@ if __name__ == "__main__":
     #   you can pick any model from the ModelCatalog
     #   we list a few representative good choices below
 
-    LLMWareConfig().set_active_db("sqlite")
+    LLMWareConfig().set_active_db("postgres")
 
-    example_models = ["bling-phi-3-gguf",
-                      "llmware/bling-1b-0.1",
-                      "llmware/bling-tiny-llama-v0",
-                      "llmware/dragon-yi-6b-gguf"]
+    # example_models = ["bling-phi-3-gguf",
+    #                  "llmware/bling-1b-0.1",
+    #                  "llmware/bling-tiny-llama-v0",
+    #                  "llmware/dragon-yi-6b-gguf"]
 
     #   to swap in a gpt-4 openai model - uncomment these two lines and `pip3 install openai`
     #   model_name = "gpt-4"
     #   os.environ["USER_MANAGED_OPENAI_API_KEY"] = "<insert-your-openai-key>"
 
     # use local cpu model
-    model_name = example_models[0]
+    # model_name = example_models[0]
+    model_name = "qwen2.5:0.5b"
+
+    #   register model
+    ModelCatalog().register_ollama_model(model_name=model_name,model_type="chat",host="localhost",port=11434)    
 
     #   two good recipes to address the use case
 
