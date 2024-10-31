@@ -12,7 +12,7 @@
 
 from llmware.models import ModelCatalog
 from llmware.prompts import Prompt
-import ast
+from llm_response_parser import parse
 
 #   one step process:  add the local LLM model to the Model Registry
 #   key params:
@@ -47,6 +47,6 @@ passage1 = ("This is one of the best quarters we can remember for the industrial
 prompter = Prompt().load_model(localai_model_name)
 response = prompter.prompt_main(passage1)
 print("# json response:", response['llm_response'])
-response['llm_response'] = ast.literal_eval(response['llm_response'])
+response = parse(response)
 sentiment_value = response["llm_response"]["sentiment"]
 print("# sentiment_value:", sentiment_value)
