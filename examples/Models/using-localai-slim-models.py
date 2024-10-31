@@ -10,9 +10,10 @@
     very easily and natively in llmware - see the GGUF example in /Models/using_gguf.py'
 """
 
-
 from llmware.models import ModelCatalog
 from llmware.prompts import Prompt
+import ast
+
 #   one step process:  add the local LLM model to the Model Registry
 #   key params:
 #       model_name      =   "my_llm_model"
@@ -28,13 +29,13 @@ model_name = "slim-sentiment-tool"
 model_card = ModelCatalog().lookup_model_card(model_name)
 print("# model_card:", model_card)
 
-ModelCatalog().register_open_chat_model(model_card["gguf_file"],
+# add "llmware/" prefix so that it won't crash with existing one
+localai_model_name = "llmware/" + model_name
+
+# LocalAI model config at https://gist.github.com/limcheekin/be44f076cff415bd0fc64cbf3e3b3107
+ModelCatalog().register_open_chat_model(localai_model_name,
                                         api_base="http://192.168.1.111:8880/v1",
-                                        context_window=model_card["context_window"],
-                                        instruction_following=model_card["instruction_following"],
-                                        prompt_wrapper=model_card["prompt_wrapper"],
-                                        temperature=model_card["temperature"],
-                                        model_type="function_call")
+                                        model_type="completion")
 
 # once registered, you can invoke like any other model in llmware
 passage1 = ("This is one of the best quarters we can remember for the industrial sector "
@@ -43,11 +44,9 @@ passage1 = ("This is one of the best quarters we can remember for the industrial
             "in Asia and Europe. Accordingly, we remain bullish on the tier 1 suppliers and would "
             "be accumulating more stock on any dips.")
 
-prompter = Prompt().load_model(model_card["gguf_file"])
-# REF: https://huggingface.co/llmware/slim-sentiment-tool/blob/main/config.json
-prompt_format = "<human> {context_passage} <classify> sentiment </classify>\n<bot>:"
-prompt = prompt_format.format(context_passage=passage1)
-print("# prompt:", prompt)
-response = prompter.prompt_main(prompt)
-print("# prompt response:", response['llm_response'])
-
+prompter = Prompt().load_model(localai_model_name)
+response = prompter.prompt_main(passage1)
+print("# json response:", response['llm_response'])
+response['llm_response'] = ast.literal_eval(response['llm_response'])
+sentiment_value = response["llm_response"]["sentiment"]
+print("# sentiment_value:", sentiment_value)
