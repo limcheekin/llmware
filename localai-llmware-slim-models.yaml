@@ -3,7 +3,7 @@
     model: llmware/slim-boolean-tool/slim-boolean.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <boolean> {{.Question}} (explain) </boolean>\n<bot>:"
   trimsuffix:
@@ -43,7 +43,7 @@
     model: llmware/slim-extract-tool/slim-extract.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <extract> {{.CustomKey}} </extract>\n<bot>:"
   trimsuffix:
@@ -133,7 +133,7 @@
     model: llmware/slim-sa-ner-tool/slim-sa-ner.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <classify> sentiment, people, organization, place </classify>\n<bot>:"
   trimsuffix:
@@ -173,7 +173,7 @@
     model: llmware/slim-summary-tool/slim-summary.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <summarize> {{.Guide}} {{.TargetSize}} </summarize>\n<bot>:"
   trimsuffix:
@@ -183,7 +183,7 @@
     model: llmware/slim-tags-3b-tool/slim-tags-3b.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <classify> tags </classify>\n<bot>:"
   trimsuffix:
@@ -213,7 +213,7 @@
     model: llmware/slim-xsum-tool/slim-xsum.gguf
     temperature: 0.0
   context_size: 2048
-  backend: stablelm
+  backend: llama
   template:
     completion: "<human> {{.Input}} <classify> xsum </classify>\n<bot>:"
   trimsuffix:
