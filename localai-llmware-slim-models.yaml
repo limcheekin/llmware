@@ -1,0 +1,220 @@
+- name: llmware/slim-boolean-tool
+  parameters:
+    model: llmware/slim-boolean-tool/slim-boolean.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <boolean> {{.Question}} (explain) </boolean>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-category-tool
+  parameters:
+    model: llmware/slim-category-tool/slim-category.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> category </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-emotions-tool
+  parameters:
+    model: llmware/slim-emotions-tool/slim-emotions.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> emotions </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-extract-tiny-tool
+  parameters:
+    model: llmware/slim-extract-tiny-tool/slim-extract-tiny.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <extract> {{.CustomKey}} </extract>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-extract-tool
+  parameters:
+    model: llmware/slim-extract-tool/slim-extract.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <extract> {{.CustomKey}} </extract>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-intent-tool
+  parameters:
+    model: llmware/slim-intent-tool/slim-intent.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> intent </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-ner-tool
+  parameters:
+    model: llmware/slim-ner-tool/slim-ner.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> people, place, organization, misc </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-nli-tool
+  parameters:
+    model: llmware/slim-nli-tool/slim-nli.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> Evidence: {{.Evidence}} \n Conclusion: {{.Conclusion}} <classify> evidence </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-q-gen-phi-3-tool
+  parameters:
+    model: llmware/slim-q-gen-phi-3-tool/slim-q-gen-phi-3.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: phi3
+  template:
+    completion: "<human> {{.Input}} <generate> {{.PrimaryKey}} </generate>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-q-gen-tiny-tool
+  parameters:
+    model: llmware/slim-q-gen-tiny-tool/slim-q-gen-tiny.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <generate> {{.PrimaryKey}} </generate>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-qa-gen-phi-3-tool
+  parameters:
+    model: llmware/slim-qa-gen-phi-3-tool/slim-qa-gen-phi-3.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: phi3
+  template:
+    completion: "<human> {{.Input}} <generate> {{.PrimaryKey}} </generate>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-qa-gen-tiny-tool
+  parameters:
+    model: llmware/slim-qa-gen-tiny-tool/slim-qa-gen-tiny.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <generate> {{.PrimaryKey}} </generate>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-ratings-tool
+  parameters:
+    model: llmware/slim-ratings-tool/slim-ratings.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> rating </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-sa-ner-tool
+  parameters:
+    model: llmware/slim-sa-ner-tool/slim-sa-ner.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <classify> sentiment, people, organization, place </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-sentiment-tool
+  parameters:
+    model: llmware/slim-sentiment-tool/slim-sentiment.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> sentiment </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-sql-tool
+  parameters:
+    model: llmware/slim-sql-tool/slim-sql.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.TableSchema}} \n {{.Question}} \n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-summary-tiny-tool
+  parameters:
+    model: llmware/slim-summary-tiny-tool/slim-summary-tiny.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <summarize> {{.Guide}} {{.TargetSize}} </summarize>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-summary-tool
+  parameters:
+    model: llmware/slim-summary-tool/slim-summary.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <summarize> {{.Guide}} {{.TargetSize}} </summarize>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-tags-3b-tool
+  parameters:
+    model: llmware/slim-tags-3b-tool/slim-tags-3b.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <classify> tags </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-tags-tool
+  parameters:
+    model: llmware/slim-tags-tool/slim-tags.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} <classify> tags </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-topics-tool
+  parameters:
+    model: llmware/slim-topics-tool/slim-topics.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: llama
+  template:
+    completion: "<human> {{.Input}} \n <classify> topics </classify> \n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
+- name: llmware/slim-xsum-tool
+  parameters:
+    model: llmware/slim-xsum-tool/slim-xsum.gguf
+    temperature: 0.0
+  context_size: 2048
+  backend: stablelm
+  template:
+    completion: "<human> {{.Input}} <classify> xsum </classify>\n<bot>:"
+  trimsuffix:
+  - "\u003c/s\u003e"
